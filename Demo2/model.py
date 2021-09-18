@@ -1,9 +1,9 @@
 # Import libraries
-from keras.applications.vgg16 import VGG16
-from keras.applications.vgg19 import VGG19
-from keras.models import Sequential
-from keras.layers import Dropout, Dense
-from keras.optimizers import Adam
+from tensorflow.keras.applications.vgg16 import VGG16
+from tensorflow.keras.applications.vgg19 import VGG19
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dropout, Dense
+from tensorflow.keras.optimizers import Adam
 from pathlib import Path
 
 # build fresh model
