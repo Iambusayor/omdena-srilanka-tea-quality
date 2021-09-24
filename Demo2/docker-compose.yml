@@ -1,0 +1,25 @@
+version: '3.9'
+
+services: 
+
+  deepstack_api:
+    container_name: deepstack_api
+    hostname: deepstack_api
+    image: deepquestai/deepstack
+    volumes: 
+      - ./detector:/modelstore/detection 
+    ports: 
+      - 80:5000
+    restart: unless-stopped
+
+  streamlit_app:
+    container_name: streamlit_app
+    hostname: streamlit_app
+    build: 
+        context: .
+        dockerfile: Dockerfile
+    ports: 
+      - 8501:8501
+    restart: always
+    depends_on: 
+      - deepstack_api

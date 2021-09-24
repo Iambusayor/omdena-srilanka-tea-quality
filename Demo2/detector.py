@@ -17,7 +17,7 @@ def predict(image, model):
 # use deepstack wrapper to connect detection model for detection
 def get_leaves(image):
     image_data = image.getvalue()
-    response = requests.post("http://localhost:80//v1/vision/custom/tea_leaves",files={"image":image_data}).json()
+    response = requests.post("http://deepstack_api:5000/v1/vision/custom/tea_leaves",files={"image":image_data}).json()
     return response, len(response['predictions']) # returns detections and number of detections 
 
 
@@ -27,7 +27,7 @@ def annotate_leaves(image, response):
 	# create imagedraw object
     draw = ImageDraw.Draw(image)
 	# create font
-    roboto_font = ImageFont.truetype(str(Path(__file__).resolve().parent /  'Roboto-Bold.ttf'), 40)
+    roboto_font = ImageFont.truetype(str(Path(__file__).resolve().parent /  'fonts/Roboto-Bold.ttf'), 40)
 
 	# annotate every detection found and labels them
     for  detection in tqdm(response["predictions"], total=len(response['predictions'])):
@@ -52,7 +52,7 @@ def predict_leaves(image, response, model, size=(224, 224)):
 	# create imagedraw object
     draw = ImageDraw.Draw(image)
 	# create font
-    roboto_font = ImageFont.truetype(str(Path(__file__).resolve().parent /  'Roboto-Bold.ttf'), 40)
+    roboto_font = ImageFont.truetype(str(Path(__file__).resolve().parent /  'fonts/Roboto-Bold.ttf'), 40)
     
 	# crop detected leaves and pass into classifier for classification, returns annotation with class label
     for  detection in tqdm(response["predictions"], total=len(response['predictions'])):
